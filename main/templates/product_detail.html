@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <p>Ціна: {{ product.price }}$</p>
+
+    <h2>Відгуки</h2>
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <strong>{{ review.author }}</strong> (Рейтинг: {{ review.rating }}): {{ review.text }}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Додати відгук</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Надіслати</button>
+    </form>
+
+    <a href="{% url 'product_list' %}">Назад до списку продуктів</a>
+</body>
+</html>
